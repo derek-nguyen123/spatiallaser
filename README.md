@@ -15,7 +15,8 @@ git clone https://github.com/derek-nguyen123/spatiallaser.git
 ```  
 Enter sl-assessment and run:
 ```sh  
-mvn clean install mvn spring-boot:run  
+mvn clean install
+mvn spring-boot:run  
 ```  
 ## Usage
 
