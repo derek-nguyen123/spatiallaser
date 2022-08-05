@@ -4,7 +4,9 @@ Run calculations on dfw_demo database. Uses SpatialObj census blocks to calculat
 of either population or income around a (latitude, longitude) pair and given a desired radius in meters.
 
 API Documentation Here: sl-assessment/doc/com/centroid/slassessment/controller/CensusPolygonController.html
-API Implementation available at: sl-assessment/src/main/java/com/centroid/slassessment/controller/CensusPolygonController.java
+API Implementation available at:
+sl-assessment/src/main/java/com/centroid/slassessment/controller/CensusPolygonController.java
+
 ## Getting Started
 
 To run the project locally, ensure that Maven and Java are up-to-date.
