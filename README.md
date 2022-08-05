@@ -5,6 +5,9 @@ of either population or income around a (latitude, longitude) pair and given a d
 
 API Documentation Here: sl-assessment/doc/com/centroid/slassessment/controller/CensusPolygonController.html
 
+API Implementation available at:
+sl-assessment/src/main/java/com/centroid/slassessment/controller/CensusPolygonController.java
+
 ## Getting Started
 
 To run the project locally, ensure that Maven and Java are up-to-date.
@@ -15,7 +18,8 @@ git clone https://github.com/derek-nguyen123/spatiallaser.git
 ```  
 Enter sl-assessment and run:
 ```sh  
-mvn clean install mvn spring-boot:run  
+mvn clean install
+mvn spring-boot:run  
 ```  
 ## Usage
 
