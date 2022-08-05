@@ -8,6 +8,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * Repository that executes calculation queries on database.
+ */
 @Repository
 public interface CensusPolygonRepository extends JpaRepository<CensusPolygon, Long> {
     @Query(value = "SELECT AVG(\"income\") "

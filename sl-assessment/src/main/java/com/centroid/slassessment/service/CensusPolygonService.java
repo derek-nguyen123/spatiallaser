@@ -4,6 +4,9 @@ import com.centroid.slassessment.entity.CensusPolygon;
 
 import java.util.List;
 
+/**
+ * Defines functions required for calculations.
+ */
 public interface CensusPolygonService {
     List<Float> pipAvgInc(Double latitude, Double longitude, Double distance);
     List<Float> pipSumInc(Double latitude, Double longitude, Double distance);
