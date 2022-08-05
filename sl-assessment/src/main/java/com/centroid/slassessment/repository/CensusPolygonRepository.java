@@ -13,63 +13,52 @@ import java.util.List;
  */
 @Repository
 public interface CensusPolygonRepository extends JpaRepository<CensusPolygon, Long> {
+    String pointInPoly = "FROM public.dfw_demo "
+            + "WHERE ST_WITHIN(ST_CENTROID(\"SpatialObj\"), "
+            + "CAST(ST_BUFFER(ST_GeographyFromText(CONCAT('POINT(', :longitude, ' ', :latitude, ')')), :distance) as GEOMETRY));";
+
+    String proportionateArea = "(ST_AREA(ST_INTERSECTION(\"SpatialObj\", CAST(ST_BUFFER(ST_GeographyFromText(CONCAT('POINT(', :longitude, ' ', :latitude, ')')), :distance) as GEOMETRY)))/"
+            + "ST_AREA(\"SpatialObj\"))) "
+            + "FROM public.dfw_demo "
+            + "WHERE ST_INTERSECTS(\"SpatialObj\", CAST(ST_BUFFER(ST_GeographyFromText(CONCAT('POINT(', :longitude, ' ', :latitude, ')')), :distance) as GEOMETRY))";
+
     @Query(value = "SELECT AVG(\"income\") "
-                 + "FROM public.dfw_demo "
-                 + "WHERE ST_WITHIN(ST_CENTROID(\"SpatialObj\"), "
-                 + "CAST(ST_BUFFER(ST_GeographyFromText(CONCAT('POINT(', :longitude, ' ', :latitude, ')')), :distance) as GEOMETRY));"
+                 + pointInPoly
                  , nativeQuery = true)
     List<Float> pipAvgInc(@Param("latitude") Double latitude, @Param("longitude") Double longitude, @Param("distance") Double distance);
 
     @Query(value = "SELECT SUM(\"income\") "
-                 + "FROM public.dfw_demo "
-                 + "WHERE ST_WITHIN(ST_CENTROID(\"SpatialObj\"), "
-                 + "CAST(ST_BUFFER(ST_GeographyFromText(CONCAT('POINT(', :longitude, ' ', :latitude, ')')), :distance) as GEOMETRY));"
+                 + pointInPoly
                  , nativeQuery = true)
     List<Float> pipSumInc(@Param("latitude") Double latitude, @Param("longitude") Double longitude, @Param("distance") Double distance);
 
     @Query(value = "SELECT AVG(\"population\") "
-                 + "FROM public.dfw_demo "
-                 + "WHERE ST_WITHIN(ST_CENTROID(\"SpatialObj\"), "
-                 + "CAST(ST_BUFFER(ST_GeographyFromText(CONCAT('POINT(', :longitude, ' ', :latitude, ')')), :distance) as GEOMETRY));"
+                 + pointInPoly
                  , nativeQuery = true)
     List<Float> pipAvgPop(@Param("latitude") Double latitude, @Param("longitude") Double longitude, @Param("distance") Double distance);
 
     @Query(value = "SELECT SUM(\"population\") "
-                 + "FROM public.dfw_demo "
-                 + "WHERE ST_WITHIN(ST_CENTROID(\"SpatialObj\"), "
-                 + "CAST(ST_BUFFER(ST_GeographyFromText(CONCAT('POINT(', :longitude, ' ', :latitude, ')')), :distance) as GEOMETRY));"
+                 + pointInPoly
                  , nativeQuery = true)
     List<Float> pipSumPop(@Param("latitude") Double latitude, @Param("longitude") Double longitude, @Param("distance") Double distance);
 
     @Query(value = "SELECT AVG(\"income\" * "
-                 + "(ST_AREA(ST_INTERSECTION(\"SpatialObj\", CAST(ST_BUFFER(ST_GeographyFromText(CONCAT('POINT(', :longitude, ' ', :latitude, ')')), :distance) as GEOMETRY)))/"
-                 + "ST_AREA(\"SpatialObj\"))) "
-                 + "FROM public.dfw_demo "
-                 + "WHERE ST_INTERSECTS(\"SpatialObj\", CAST(ST_BUFFER(ST_GeographyFromText(CONCAT('POINT(', :longitude, ' ', :latitude, ')')), :distance) as GEOMETRY))"
+                 + proportionateArea
                  , nativeQuery = true)
     List<Float> propAreaAvgInc(@Param("latitude") Double latitude, @Param("longitude") Double longitude, @Param("distance") Double distance);
 
     @Query(value = "SELECT SUM(\"income\" * "
-                 + "(ST_AREA(ST_INTERSECTION(\"SpatialObj\", CAST(ST_BUFFER(ST_GeographyFromText(CONCAT('POINT(', :longitude, ' ', :latitude, ')')), :distance) as GEOMETRY)))/"
-                 + "ST_AREA(\"SpatialObj\"))) "
-                 + "FROM public.dfw_demo "
-                 + "WHERE ST_INTERSECTS(\"SpatialObj\", CAST(ST_BUFFER(ST_GeographyFromText(CONCAT('POINT(', :longitude, ' ', :latitude, ')')), :distance) as GEOMETRY))"
+                 + proportionateArea
                  , nativeQuery = true)
     List<Float> propAreaSumInc(@Param("latitude") Double latitude, @Param("longitude") Double longitude, @Param("distance") Double distance);
 
     @Query(value = "SELECT AVG(\"population\" * "
-                 + "(ST_AREA(ST_INTERSECTION(\"SpatialObj\", CAST(ST_BUFFER(ST_GeographyFromText(CONCAT('POINT(', :longitude, ' ', :latitude, ')')), :distance) as GEOMETRY)))/"
-                 + "ST_AREA(\"SpatialObj\"))) "
-                 + "FROM public.dfw_demo "
-                 + "WHERE ST_INTERSECTS(\"SpatialObj\", CAST(ST_BUFFER(ST_GeographyFromText(CONCAT('POINT(', :longitude, ' ', :latitude, ')')), :distance) as GEOMETRY))"
+                 + proportionateArea
                  , nativeQuery = true)
     List<Float> propAreaAvgPop(@Param("latitude") Double latitude, @Param("longitude") Double longitude, @Param("distance") Double distance);
 
     @Query(value = "SELECT SUM(\"population\" * "
-                 + "(ST_AREA(ST_INTERSECTION(\"SpatialObj\", CAST(ST_BUFFER(ST_GeographyFromText(CONCAT('POINT(', :longitude, ' ', :latitude, ')')), :distance) as GEOMETRY)))/"
-                 + "ST_AREA(\"SpatialObj\"))) "
-                 + "FROM public.dfw_demo "
-                 + "WHERE ST_INTERSECTS(\"SpatialObj\", CAST(ST_BUFFER(ST_GeographyFromText(CONCAT('POINT(', :longitude, ' ', :latitude, ')')), :distance) as GEOMETRY))"
+                 + proportionateArea
                  , nativeQuery = true)
     List<Float> propAreaSumPop(@Param("latitude") Double latitude, @Param("longitude") Double longitude, @Param("distance") Double distance);
 
