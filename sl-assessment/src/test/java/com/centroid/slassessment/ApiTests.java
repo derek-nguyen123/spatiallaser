@@ -25,25 +25,25 @@ public class ApiTests {
 
     @Test
     public void pipSumpPopTest() throws Exception {
-        this.mockMvc.perform(get("/api/pipSumPop?latitude=33.045352&longitude=-96.781508&distance=2000"))
+        this.mockMvc.perform(get("/api/pip/sum/pop?latitude=33.045352&longitude=-96.781508&distance=2000"))
                 .andExpect(status().isOk());
     }
 
     @Test
     public void pipAvgIncTest() throws Exception {
-        this.mockMvc.perform(get("/api/pipAvgInc?latitude=33.045352&longitude=-96.781508&distance=2000"))
+        this.mockMvc.perform(get("/api/pip/avg/inc?latitude=33.045352&longitude=-96.781508&distance=2000"))
                 .andExpect(status().isOk());
     }
 
     @Test
     public void propAreaAvgIncTest() throws Exception {
-        this.mockMvc.perform(get("/api/propAreaAvgInc?latitude=33.045352&longitude=-96.781508&distance=2000"))
+        this.mockMvc.perform(get("/api/propArea/avg/inc?latitude=33.045352&longitude=-96.781508&distance=2000"))
                 .andExpect(status().isOk());
     }
 
     @Test
     public void propAreaSumPopTest() throws Exception {
-        this.mockMvc.perform(get("/api/propAreaSumPop?latitude=33.045352&longitude=-96.781508&distance=2000"))
+        this.mockMvc.perform(get("/api/propArea/sum/pop?latitude=33.045352&longitude=-96.781508&distance=2000"))
                 .andExpect(status().isOk());
     }
 

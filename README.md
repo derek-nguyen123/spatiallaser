@@ -25,19 +25,19 @@ With the project running in one terminal, open another terminal to run curl comm
 
 Sum of populations point-in-poly 2km radius around (33.045352,  -96.781508):
 ```sh
-curl "localhost:8080/api/pipSumPop?latitude=33.045352&longitude=-96.781508&distance=2000"
+curl "localhost:8080/api/pip/sum/pop?latitude=33.045352&longitude=-96.781508&distance=2000"
 ```
 Average incomes point-in-poly 2km radius around (33.045352,  -96.781508):
 ```sh
-curl "localhost:8080/api/pipAvgInc?latitude=33.045352&longitude=-96.781508&distance=2000"
+curl "localhost:8080/api/pip/avg/inc?latitude=33.045352&longitude=-96.781508&distance=2000"
 ```
 Sum of populations proportionate to area in 2km radius around (33.045352,  -96.781508):
 ```sh
-curl "localhost:8080/api/propAreaSumPop?latitude=33.045352&longitude=-96.781508&distance=2000"
+curl "localhost:8080/api/propArea/sum/pop?latitude=33.045352&longitude=-96.781508&distance=2000"
 ```
 Average incomes proportionate to area in buffer 2km radius around (33.045352,  -96.781508):
 ```sh
-curl "localhost:8080/api/propAreaAvgInc?latitude=33.045352&longitude=-96.781508&distance=2000"
+curl "localhost:8080/api/propArea/avg/inc?latitude=33.045352&longitude=-96.781508&distance=2000"
 ```
 
 

@@ -33,7 +33,7 @@ public class CensusPolygonController {
      * @param distance distance around point to generate buffer
      * @return point-in-poly average income
      */
-    @GetMapping(path="/pipAvgInc")
+    @GetMapping(path="/pip/avg/inc")
     public List<Float> pipAvgInc(@RequestParam Double latitude, @RequestParam Double longitude,
                                  @RequestParam Double distance) {
         return censusPolygonService.pipAvgInc(latitude, longitude, distance);
@@ -47,7 +47,7 @@ public class CensusPolygonController {
      * @param distance distance around point to generate buffer
      * @return point-in-poly summed income
      */
-    @GetMapping(path="/pipSumInc")
+    @GetMapping(path="/pip/sum/inc")
     public List<Float> pipSumInc(@RequestParam Double latitude, @RequestParam Double longitude,
                                  @RequestParam Double distance) {
         return censusPolygonService.pipSumInc(latitude, longitude, distance);
@@ -61,7 +61,7 @@ public class CensusPolygonController {
      * @param distance distance around point to generate buffer
      * @return point-in-poly average population
      */
-    @GetMapping(path="/pipAvgPop")
+    @GetMapping(path="/pip/avg/pop")
     public List<Float> pipAvgPop(@RequestParam Double latitude, @RequestParam Double longitude,
                                  @RequestParam Double distance) {
         return censusPolygonService.pipAvgPop(latitude, longitude, distance);
@@ -75,7 +75,7 @@ public class CensusPolygonController {
      * @param distance distance around point to generate buffer
      * @return point-in-poly summed population
      */
-    @GetMapping(path="/pipSumPop")
+    @GetMapping(path="/pip/sum/pop")
     public List<Float> pipSumPop(@RequestParam Double latitude, @RequestParam Double longitude,
                                  @RequestParam Double distance) {
         return censusPolygonService.pipSumPop(latitude, longitude, distance);
@@ -89,7 +89,7 @@ public class CensusPolygonController {
      * @param distance distance around point to generate buffer
      * @return average income proportionate to area in buffer
      */
-    @GetMapping(path="/propAreaAvgInc")
+    @GetMapping(path="/propArea/avg/inc")
     public List<Float> propAreaAvgInc(@RequestParam Double latitude, @RequestParam Double longitude,
                                       @RequestParam Double distance) {
         return censusPolygonService.propAreaAvgInc(latitude, longitude, distance);
@@ -103,7 +103,7 @@ public class CensusPolygonController {
      * @param distance distance around point to generate buffer
      * @return summed income proportionate to area in buffer
      */
-    @GetMapping(path="/propAreaSumInc")
+    @GetMapping(path="/propArea/sum/inc")
     public List<Float> propAreaSumInc(@RequestParam Double latitude, @RequestParam Double longitude,
                                       @RequestParam Double distance) {
         return censusPolygonService.propAreaSumInc(latitude, longitude, distance);
@@ -117,7 +117,7 @@ public class CensusPolygonController {
      * @param distance distance around point to generate buffer
      * @return average population proportionate to area in buffer
      */
-    @GetMapping(path="/propAreaAvgPop")
+    @GetMapping(path="/propArea/avg/pop")
     public List<Float> propAreaAvgPop(@RequestParam Double latitude, @RequestParam Double longitude,
                                       @RequestParam Double distance) {
         return censusPolygonService.propAreaAvgPop(latitude, longitude, distance);
@@ -131,7 +131,7 @@ public class CensusPolygonController {
      * @param distance distance around point to generate buffer
      * @return summed population proportionate to area in buffer
      */
-    @GetMapping(path="/propAreaSumPop")
+    @GetMapping(path="/propArea/sum/pop")
     public List<Float> propAreaSumPop(@RequestParam Double latitude, @RequestParam Double longitude,
                                       @RequestParam Double distance) {
         return censusPolygonService.propAreaSumPop(latitude, longitude, distance);
