@@ -3,7 +3,7 @@
 Run calculations on dfw_demo database. Uses SpatialObj census blocks to calculate sums or averages
 of either population or income around a (latitude, longitude) pair and given a desired radius in meters.
 
-API Documentation Here: doc/com/centroid/slassessment/controller/CensusPolygonController.html
+API Documentation Here: sl-assessment/doc/com/centroid/slassessment/controller/CensusPolygonController.html
 
 ## Getting Started
 

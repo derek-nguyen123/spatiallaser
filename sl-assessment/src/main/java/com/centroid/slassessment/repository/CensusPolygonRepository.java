@@ -15,49 +15,49 @@ import java.util.List;
 public interface CensusPolygonRepository extends JpaRepository<CensusPolygon, Long> {
     String pointInPoly = "FROM public.dfw_demo "
             + "WHERE ST_WITHIN(ST_CENTROID(\"SpatialObj\"), "
-            + "CAST(ST_BUFFER(ST_GeographyFromText(CONCAT('POINT(', :longitude, ' ', :latitude, ')')), :distance) as GEOMETRY));";
+            + "CAST(ST_BUFFER(ST_GeographyFromText(CONCAT('POINT(', :longitude, ' ', :latitude, ')')), :distance) as GEOMETRY))";
 
     String proportionateArea = "(ST_AREA(ST_INTERSECTION(\"SpatialObj\", CAST(ST_BUFFER(ST_GeographyFromText(CONCAT('POINT(', :longitude, ' ', :latitude, ')')), :distance) as GEOMETRY)))/"
-            + "ST_AREA(\"SpatialObj\"))) "
+            + "ST_AREA(\"SpatialObj\"))), 0)"
             + "FROM public.dfw_demo "
             + "WHERE ST_INTERSECTS(\"SpatialObj\", CAST(ST_BUFFER(ST_GeographyFromText(CONCAT('POINT(', :longitude, ' ', :latitude, ')')), :distance) as GEOMETRY))";
 
-    @Query(value = "SELECT AVG(\"income\") "
+    @Query(value = "SELECT COALESCE(AVG(\"income\"), 0) "
                  + pointInPoly
                  , nativeQuery = true)
     List<Float> pipAvgInc(@Param("latitude") Double latitude, @Param("longitude") Double longitude, @Param("distance") Double distance);
 
-    @Query(value = "SELECT SUM(\"income\") "
+    @Query(value = "SELECT COALESCE(SUM(\"income\"), 0)"
                  + pointInPoly
                  , nativeQuery = true)
     List<Float> pipSumInc(@Param("latitude") Double latitude, @Param("longitude") Double longitude, @Param("distance") Double distance);
 
-    @Query(value = "SELECT AVG(\"population\") "
+    @Query(value = "SELECT COALESCE(AVG(\"population\"), 0)"
                  + pointInPoly
                  , nativeQuery = true)
     List<Float> pipAvgPop(@Param("latitude") Double latitude, @Param("longitude") Double longitude, @Param("distance") Double distance);
 
-    @Query(value = "SELECT SUM(\"population\") "
+    @Query(value = "SELECT COALESCE(SUM(\"population\"), 0)"
                  + pointInPoly
                  , nativeQuery = true)
     List<Float> pipSumPop(@Param("latitude") Double latitude, @Param("longitude") Double longitude, @Param("distance") Double distance);
 
-    @Query(value = "SELECT AVG(\"income\" * "
+    @Query(value = "SELECT COALESCE(AVG(\"income\" * "
                  + proportionateArea
                  , nativeQuery = true)
     List<Float> propAreaAvgInc(@Param("latitude") Double latitude, @Param("longitude") Double longitude, @Param("distance") Double distance);
 
-    @Query(value = "SELECT SUM(\"income\" * "
+    @Query(value = "SELECT COALESCE(SUM(\"income\" * "
                  + proportionateArea
                  , nativeQuery = true)
     List<Float> propAreaSumInc(@Param("latitude") Double latitude, @Param("longitude") Double longitude, @Param("distance") Double distance);
 
-    @Query(value = "SELECT AVG(\"population\" * "
+    @Query(value = "SELECT COALESCE(AVG(\"population\" * "
                  + proportionateArea
                  , nativeQuery = true)
     List<Float> propAreaAvgPop(@Param("latitude") Double latitude, @Param("longitude") Double longitude, @Param("distance") Double distance);
 
-    @Query(value = "SELECT SUM(\"population\" * "
+    @Query(value = "SELECT COALESCE(SUM(\"population\" * "
                  + proportionateArea
                  , nativeQuery = true)
     List<Float> propAreaSumPop(@Param("latitude") Double latitude, @Param("longitude") Double longitude, @Param("distance") Double distance);
