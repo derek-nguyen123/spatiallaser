@@ -19,22 +19,22 @@ public class CensusPolygonServiceImpl implements CensusPolygonService {
     }
 
     @Override
-    public List<Float> pipAvgInc(Double longitude, Double latitude, Double distance) {
+    public List<Float> pipAvgInc(Double latitude, Double longitude, Double distance) {
         return censusPolygonRepository.pipAvgInc(latitude, longitude, distance);
     }
 
     @Override
-    public List<Float> pipSumInc(Double longitude, Double latitude, Double distance) {
+    public List<Float> pipSumInc(Double latitude, Double longitude, Double distance) {
         return censusPolygonRepository.pipSumInc(latitude, longitude, distance);
     }
 
     @Override
-    public List<Float> pipAvgPop(Double longitude, Double latitude, Double distance) {
+    public List<Float> pipAvgPop(Double latitude, Double longitude, Double distance) {
         return censusPolygonRepository.pipAvgPop(latitude, longitude, distance);
     }
 
     @Override
-    public List<Float> pipSumPop(Double longitude, Double latitude, Double distance) {
+    public List<Float> pipSumPop(Double latitude, Double longitude, Double distance) {
         return censusPolygonRepository.pipSumPop(latitude, longitude, distance);
     }
 
