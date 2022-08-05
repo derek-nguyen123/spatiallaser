@@ -20,11 +20,6 @@ public class CensusPolygonController {
     @Autowired
     private CensusPolygonService censusPolygonService;
 
-    @GetMapping
-    public List<CensusPolygon> findAll() {
-        return censusPolygonService.findAll();
-    }
-
     /**
      * Finds the point-in-poly average income of a circular buffer around point
      * (latitude, longitude) with radius distance.

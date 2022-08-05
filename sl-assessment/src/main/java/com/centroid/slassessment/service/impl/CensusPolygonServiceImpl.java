@@ -17,10 +17,6 @@ public class CensusPolygonServiceImpl implements CensusPolygonService {
     @Autowired
     private CensusPolygonRepository censusPolygonRepository;
 
-    public List<CensusPolygon> findAll() {
-        return censusPolygonRepository.findAll();
-    }
-
     /**
      * Calls query on database to find point-in-poly average income
      * of a circular buffer around point (latitude, longitude) with radius distance.

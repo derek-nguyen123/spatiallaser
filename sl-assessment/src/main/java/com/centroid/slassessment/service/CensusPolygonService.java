@@ -16,5 +16,4 @@ public interface CensusPolygonService {
     List<Float> propAreaSumInc(Double latitude, Double longitude, Double distance);
     List<Float> propAreaAvgPop(Double latitude, Double longitude, Double distance);
     List<Float> propAreaSumPop(Double latitude, Double longitude, Double distance);
-    List<CensusPolygon> findAll();
 }

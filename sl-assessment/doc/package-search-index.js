@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"com.centroid.slassessment"},{"l":"com.centroid.slassessment.controller"},{"l":"com.centroid.slassessment.entity"},{"l":"com.centroid.slassessment.repository"},{"l":"com.centroid.slassessment.service"},{"l":"com.centroid.slassessment.service.impl"}];updateSearchResults();

@@ -1,6 +1,3 @@
-com.centroid.slassessment
 com.centroid.slassessment.controller
-com.centroid.slassessment.entity
-com.centroid.slassessment.repository
 com.centroid.slassessment.service
 com.centroid.slassessment.service.impl
