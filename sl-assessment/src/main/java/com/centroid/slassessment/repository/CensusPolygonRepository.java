@@ -16,10 +16,12 @@ public interface CensusPolygonRepository extends JpaRepository<CensusPolygon, Lo
     String pointInPoly = "FROM public.dfw_demo "
             + "WHERE ST_WITHIN(ST_CENTROID(\"SpatialObj\"), "
             + "CAST(ST_BUFFER(ST_GeographyFromText(CONCAT('POINT(', :longitude, ' ', :latitude, ')')), :distance) as GEOMETRY))";
-
-    String proportionateArea = "(ST_AREA(ST_INTERSECTION(\"SpatialObj\", CAST(ST_BUFFER(ST_GeographyFromText(CONCAT('POINT(', :longitude, ' ', :latitude, ')')), :distance) as GEOMETRY)))/"
-            + "ST_AREA(\"SpatialObj\"))), 0)"
-            + "FROM public.dfw_demo "
+    String withClause = "WITH weights AS(SELECT \"Key\", "
+            + "ST_AREA(ST_INTERSECTION(\"SpatialObj\", cast(ST_BUFFER(ST_GeographyFromText(CONCAT('POINT(', :longitude, ' ', :latitude, ')')), :distance) "
+            + "as GEOMETRY)))/ST_AREA(\"SpatialObj\") as proportion "
+            + "from public.dfw_demo "
+            + "WHERE ST_INTERSECTS(\"SpatialObj\", cast(ST_BUFFER(ST_GeographyFromText(CONCAT('POINT(', :longitude, ' ', :latitude, ')')), :distance) as GEOMETRY)))";
+    String proportionateArea = "FROM public.dfw_demo INNER JOIN weights on weights.\"Key\" = dfw_demo.\"Key\" "
             + "WHERE ST_INTERSECTS(\"SpatialObj\", CAST(ST_BUFFER(ST_GeographyFromText(CONCAT('POINT(', :longitude, ' ', :latitude, ')')), :distance) as GEOMETRY))";
 
     @Query(value = "SELECT COALESCE(AVG(\"income\"), 0) "
@@ -42,22 +44,26 @@ public interface CensusPolygonRepository extends JpaRepository<CensusPolygon, Lo
                  , nativeQuery = true)
     List<Float> pipSumPop(@Param("latitude") Double latitude, @Param("longitude") Double longitude, @Param("distance") Double distance);
 
-    @Query(value = "SELECT COALESCE(AVG(\"income\" * "
+    @Query(value = withClause
+                 + "SELECT COALESCE(SUM(\"income\" * \"proportion\")/SUM(\"proportion\"), 0) "
                  + proportionateArea
                  , nativeQuery = true)
     List<Float> propAreaAvgInc(@Param("latitude") Double latitude, @Param("longitude") Double longitude, @Param("distance") Double distance);
 
-    @Query(value = "SELECT COALESCE(SUM(\"income\" * "
+    @Query(value = withClause
+                 + "SELECT COALESCE(SUM(\"income\" * \"proportion\"), 0) "
                  + proportionateArea
                  , nativeQuery = true)
     List<Float> propAreaSumInc(@Param("latitude") Double latitude, @Param("longitude") Double longitude, @Param("distance") Double distance);
 
-    @Query(value = "SELECT COALESCE(AVG(\"population\" * "
+    @Query(value = withClause
+                 + "SELECT COALESCE(SUM(\"population\" * \"proportion\")/SUM(\"proportion\"), 0) "
                  + proportionateArea
                  , nativeQuery = true)
     List<Float> propAreaAvgPop(@Param("latitude") Double latitude, @Param("longitude") Double longitude, @Param("distance") Double distance);
 
-    @Query(value = "SELECT COALESCE(SUM(\"population\" * "
+    @Query(value = withClause
+                 + "SELECT COALESCE(SUM(\"population\" * \"proportion\"), 0) "
                  + proportionateArea
                  , nativeQuery = true)
     List<Float> propAreaSumPop(@Param("latitude") Double latitude, @Param("longitude") Double longitude, @Param("distance") Double distance);
